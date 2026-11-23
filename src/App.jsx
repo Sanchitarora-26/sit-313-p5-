@@ -12,21 +12,21 @@ const articles = [
   {
     title: 'Kirti Mandir',
     description: 'A memorable place that I explored and captured through photography.',
-    image: '/images/IMG_8768.jpeg',
+    image: '/images/IMG_8768.jpg',
     rating: '5.0',
     author: 'Sanchit Arora'
   },
   {
     title: 'Vrindavan Dham',
     description: 'A beautiful location representing culture, architecture and peaceful surroundings.',
-    image: '/images/IMG_8769.jpeg',
+    image: '/images/IMG_8769.jpg',
     rating: '4.9',
     author: 'Sanchit Arora'
   },
   {
     title: 'Barsana Radha Rani Temple',
     description: 'A memorable place captured during my visit to Barsana.',
-    image: '/images/IMG_8774.jpeg',
+    image: '/images/IMG_8774.jpg',
     rating: '4.8',
     author: 'Sanchit Arora'
   }

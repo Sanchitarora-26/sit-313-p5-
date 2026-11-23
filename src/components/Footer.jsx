@@ -1,14 +1,47 @@
+
 import { useState } from 'react';
 
 function Footer() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState('');
 
-  function handleSubscribe(event) {
+  async function handleSubscribe(event) {
     event.preventDefault();
-    if (!email) return;
-    setMessage(`Thanks! ${email} has been added for future updates.`);
-    setEmail('');
+
+    setMessage('');
+    setMessageType('');
+
+    if (!email.trim()) {
+      setMessage('Please enter your email address.');
+      setMessageType('error');
+      return;
+    }
+
+    try {
+      const response = await fetch('/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: email.trim() })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setMessage(data.message || 'Please enter a valid email address.');
+        setMessageType('error');
+        return;
+      }
+
+      setMessage(data.message || 'Subscription successful! Please check your email.');
+      setMessageType('success');
+      setEmail('');
+    } catch (error) {
+      setMessage('Unable to subscribe right now. Please try again later.');
+      setMessageType('error');
+    }
   }
 
   return (
@@ -22,7 +55,7 @@ function Footer() {
           </p>
         </div>
 
-        <form onSubmit={handleSubscribe}>
+        <form onSubmit={handleSubscribe} noValidate>
           <label className="sr-only" htmlFor="footer-email">
             Email address
           </label>
@@ -33,7 +66,11 @@ function Footer() {
               type="email"
               placeholder="Enter your email"
               value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={(event) => {
+                setEmail(event.target.value);
+                setMessage('');
+                setMessageType('');
+              }}
               required
             />
 
@@ -41,8 +78,8 @@ function Footer() {
           </div>
 
           <p
-            className="form-message"
-            role="status"
+            className={`form-message ${messageType}`}
+            role={messageType === 'error' ? 'alert' : 'status'}
             aria-live="polite"
           >
             {message}

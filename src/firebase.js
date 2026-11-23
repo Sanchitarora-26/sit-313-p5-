@@ -1,28 +1,25 @@
-import { initializeApp, getApps } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
 
-// Add your Firebase web-app values to a local .env file when you need Firebase.
-// Do not commit the .env file or expose private credentials in the repository.
+
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  apiKey: "AIzaSyBIySnm8EZl2Y2cwHCI333CBEM4uDL6F_Q",
+  authDomain: "dev-deakin-p4-654ff.firebaseapp.com",
+  projectId: "dev-deakin-p4-654ff",
+  storageBucket: "dev-deakin-p4-654ff.firebasestorage.app",
+  messagingSenderId: "123248250267",
+  appId: "1:123248250267:web:fe612f42f65ad894c1e53e"
 };
 
-const hasFirebaseConfig = Boolean(
-  firebaseConfig.apiKey &&
-  firebaseConfig.authDomain &&
-  firebaseConfig.projectId &&
-  firebaseConfig.appId
-);
+// Initialise Firebase
+const app = initializeApp(firebaseConfig);
 
-const app = hasFirebaseConfig
-  ? (getApps().length ? getApps()[0] : initializeApp(firebaseConfig))
-  : null;
+// Initialise Firebase Authentication
+export const auth = getAuth(app);
 
-export const auth = app ? getAuth(app) : null;
-export const db = app ? getFirestore(app) : null;
+// Initialise Cloud Firestore
+export const db = getFirestore(app);
+
+export default app;
