@@ -1,32 +1,89 @@
-# SIT313 Secure Frontend Applications — C1 New Post Page
+# SIT313 P5 – Newsletter Subscription
 
-This project extends the existing DEV@Deakin/Chitkara React + Vite website with a New Post page.
+## Project Overview
 
-## Run locally
+This project is an extension of my DEV@Deakin website. In this task, I implemented a newsletter subscription feature using a React frontend and a Node.js backend.
 
-1. Install Node.js (LTS) if it is not installed.
-2. Open this folder in VS Code.
-3. In the terminal run:
+Users can enter their email address in the newsletter section and submit the form to subscribe.
 
-   ```bash
-   npm install
-   npm run dev
-   ```
+## Features
 
-4. Open the local URL printed by Vite (normally `http://localhost:5173`).
-5. Select **New Post** in the navigation or visit `/post`.
+- Newsletter subscription form.
+- Email input validation.
+- React frontend connected to an Express backend.
+- POST `/subscribe` API endpoint.
+- SendGrid integration for email service.
+- Success and error messages displayed to users.
 
-## C1 features
+## Technologies Used
 
-- React `useState` manages the selected post type and form values.
-- Conditional rendering switches between the Question form and Article form.
-- Validation checks title length, question/abstract/article content, tag count, tag length, and duplicate tags.
-- Pressing **Post** validates the form and displays a browser popup. This task intentionally does not save a post to a backend.
-- Responsive styles are included for desktop and mobile layouts.
+- React
+- JavaScript
+- Node.js
+- Express.js
+- SendGrid
+- HTML and CSS
+- Vite
 
-## Before submission
+## Project Setup
 
-- Create a GitLab project named **Task C1** (or the exact project name specified by your tutor) with **Internal** visibility.
-- Commit all source files and public resources.
-- Do **not** commit `node_modules`, `dist`, `.env`, or secret keys.
-- Add screenshots and your Panopto video link to the report template.
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Configure environment variables
+
+Create a `.env` file in the project root and add your own credentials:
+
+```env
+SENDGRID_API_KEY=your_sendgrid_api_key
+FROM_EMAIL=your_verified_sender_email
+PORT=3000
+```
+
+Do not upload the `.env` file to GitHub.
+
+### 3. Start the backend server
+
+```bash
+node server.js
+```
+
+### 4. Start the React frontend
+
+Open another terminal and run:
+
+```bash
+npm run dev
+```
+
+Open the local URL shown by Vite in your browser.
+
+## API Testing
+
+The newsletter API uses:
+
+**POST** `/subscribe`
+
+The API accepts an email address and validates it before processing the subscription.
+
+Testing results:
+
+- Invalid email: HTTP 400 Bad Request.
+- Valid email: HTTP 200 OK, when the email service is configured successfully.
+
+## Security
+
+- Environment variables are used for sensitive credentials.
+- The `.env` file is excluded using `.gitignore`.
+- Email input is validated before processing.
+
+## Repository
+
+Add your updated GitHub repository link here.
+
+## Demonstration Video
+
+Add your P5 walkthrough video link here.
